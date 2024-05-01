@@ -1,0 +1,17 @@
+.book-card {
+    background-image: linear-gradient(#140029, #858585);
+    text-align: center;
+    padding: 1rem;
+    width: 15rem;
+    height: 20rem;
+    display: inline-grid;
+    margin: 1rem 2rem;
+    border-radius: 10px;
+}
+
+.book-image {
+    justify-self: center;
+    width:  200px;
+    height: 200px;
+    object-fit: cover;
+}
