@@ -52,8 +52,9 @@ if __name__ == '__main__':
             book = Book(
                 title=fake.text(max_nb_chars=20),
                 author=fake.name(),
-                description=fake.paragraph(nb_sentences=3),
-                year_published=fake.year()
+                summary=fake.paragraph(nb_sentences=3),
+                year_published=fake.year(),
+                image_url=fake.image_url()
             )
 
             books.append(book)
@@ -68,7 +69,7 @@ if __name__ == '__main__':
         for i in range (20):
             review = Review(
                 subject=fake.text(max_nb_chars=20),
-                text=fake.paragraph(nb_sentences=3),
+                description=fake.paragraph(nb_sentences=3),
                 rating=fake.random_digit()
             )
 
