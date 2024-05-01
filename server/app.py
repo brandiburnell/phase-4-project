@@ -12,11 +12,6 @@ from config import app, db, api
 from models import User
 
 # Views go here!
-
-# @app.route('/')
-# def index():
-#     return '<h1>Project Server</h1>'
-
 class Home(Resource):
     def get(self):
         return make_response('Welcome to the Books API', 200)
