@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Standard library imports
-from random import randint, choice as rc
+from random import randint, choice as rc, randrange
 
 # Remote library imports
 from faker import Faker
@@ -70,7 +70,7 @@ if __name__ == '__main__':
             review = Review(
                 subject=fake.text(max_nb_chars=20),
                 description=fake.paragraph(nb_sentences=3),
-                rating=fake.random_digit()
+                rating=randint(1,5)
             )
 
             review.user = rc(users)

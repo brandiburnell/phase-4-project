@@ -46,7 +46,7 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
-    rating = db.Column(db.Integer, nullable=False) # maybe constrain to less than 5
+    rating = db.Column(db.Integer, nullable=False) # maybe constrain to between 1 than 5
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
