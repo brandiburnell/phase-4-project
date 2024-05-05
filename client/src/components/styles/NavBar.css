@@ -1,0 +1,21 @@
+nav {
+display: flex;
+justify-content: space-between;
+padding: 1rem 2rem;
+background: #4F4758;
+}
+.nav-link{
+    display: flex;
+    list-style: none;
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 5px;
+}
+
+.active {
+    color: whitesmoke;
+    border-style: dotted;
+    box-sizing: content-box;
+    border-width: 3px;
+    border-radius: 10px;
+}

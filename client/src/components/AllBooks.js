@@ -1,6 +1,7 @@
 import React from "react";
 import BookCard from "./BookCard";
 import { Outlet, useOutletContext } from "react-router-dom";
+import "../components/styles/AllBooks.css"
 
 function AllBooks() {
     const [books, setBooks] = useOutletContext();
@@ -11,14 +12,14 @@ function AllBooks() {
                 title={book.title}
                 author={book.author}
                 image_url={book.image_url}
-                rating={book.rating}
+                reviews={book.reviews}
+                key={book.id}
             />
         );
     });
 
     return (
-        <div>
-            <h1>books</h1>
+        <div className="book-container">
             {booksToDisplay}
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
+import NavBar from "./NavBar";
 
 function App() {
   // have all huts pop in
@@ -13,10 +14,10 @@ function App() {
   }, []);
 
   return (
-    <body className="body">
-      <h1>bookshelf</h1>
+    <div className="body">
+      <NavBar />
       <Outlet context={[books, setBooks]} />
-    </body>
+    </div>
   );
 }
 
