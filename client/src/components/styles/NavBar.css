@@ -4,6 +4,7 @@ justify-content: space-between;
 padding: 1rem 2rem;
 background: #4F4758;
 }
+
 .nav-link{
     display: flex;
     list-style: none;
