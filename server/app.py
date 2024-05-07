@@ -21,6 +21,23 @@ class Books(Resource):
         books = [book.to_dict() for book in Book.query.all()]
 
         return make_response(books, 200)
+    
+    def post(self):
+        request_data = request.get_json()
+        newBook = Book(
+            title=request_data['title'],
+            author=request_data['author'],
+            year_published=request_data['year_published'],
+            summary=request_data['summary'],
+            image_url=request_data['image_url']
+        )
+        
+        db.session.add(newBook)
+        db.session.commit()
+
+        return make_response(newBook.to_dict(), 201)
+
+
 
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')
