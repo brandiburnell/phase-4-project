@@ -38,7 +38,6 @@ class Books(Resource):
         return make_response(newBook.to_dict(), 201)
 
 
-
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')
 
