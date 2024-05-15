@@ -1,93 +1,112 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../components/styles/BookForm.css"
 import { useOutletContext } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
 function BookForm() {
-    const [title, setTitle] = useState("");
-    const [author, setAuthor] = useState("");
-    const [year, setYear] = useState("");
-    const [summary, setSummary] = useState("");
-    const [url, setUrl] = useState("");
+    // const [title, setTitle] = useState("");
+    // const [author, setAuthor] = useState("");
+    // const [year, setYear] = useState("");
+    // const [summary, setSummary] = useState("");
+    // const [url, setUrl] = useState("");
     const [books, setBooks] = useOutletContext();
+    const [refreshPage, setRefreshPage] = useState(false);
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        const formData = {
-            title: title,
-            author: author,
-            year_published: year,
-            summary: summary,
-            image_url: url
-        };
-        console.log(formData);
-        fetch('http://localhost:5555/books', {
-            method: "POST",
-            headers: {
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify(formData),
-        })
-            .then(r => r.json())
-            .then(newBook => setBooks([...books, newBook]))
-            .catch(error => console.error(error));
-            alert("new book added :)")
-    }
+    useEffect(() => {
+        fetch('http://localhost:5555/books')
+            .then((r) => r.json())
+            .then(books => {
+                setBooks(books);
+            });
+    }, [refreshPage]);
+
+    const formSchema = yup.object().shape({
+        // title: yup.string().required("Must enter a book title"),
+        // author: yup.string().required("Must enter an author"),
+        // yearPublished: yup.number().positive().integer()
+        //                 .required("Must enter a year published")
+        //                 .typeError("Please enter an integer")
+        //                 .min(2000),
+        // summary: yup.string().required("Must enter a book summary"),
+        // image_url: yup.string().required("Must enter an image url")
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            title: "",
+            author: "",
+            yearPublished: "",
+            summary: "",
+            image_url: "",
+        },
+        validationSchema: formSchema,
+        onSubmit: (values) => {
+            fetch('books', {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(values, null, 2),
+            })
+                .then((res) => {
+                    if (res.status == 200){
+                      setRefreshPage(!refreshPage)
+                    }
+                });
+        }
+    });
 
     return (
         <div className="book-form-container">
             <h2 className="page-title">add a new book using the form below</h2>
-            <form className="book-form" onSubmit={handleSubmit}>
+            <form className="book-form" onSubmit={formik.handleSubmit}>
                 <label className="form-box">title:</label>
                 <input
-                    id="title-input"
-                    type="text"
-                    value={title}
-                    required="required"
-                    onChange={(e) => setTitle(e.target.value)}
+                    id="title"
+                    name="title"
+                    value={formik.values.title}
+                    onChange={formik.handleChange}
                 >
                 </input>
                 <br/>
                 <label className="form-box">author:</ label>
                 <input
-                    id="author-input"
-                    type="text"
-                    value={author}
-                    required="required"
-                    onChange={(e) => setAuthor(e.target.value)}
+                    id="author"
+                    name="author"
+                    value={formik.values.author}
+                    onChange={formik.handleChange}
                 >
                 </input>
                 <br />
                 <label className="form-box">year published:</label>
                 <input
-                    id="year-input"
-                    type="text"
-                    value={year}
-                    required="required"
-                    onChange={(e) => setYear(e.target.value)}
+                    id="yearPublihed"
+                    name="yearPublished"
+                    value={formik.values.yearPublished}
+                    onChange={formik.handleChange}
                 >
                 </input>
                 <br />
                 <label className="form-box">summary:</label>
                 <input 
-                    id="summary-input"
-                    type="text"
-                    value={summary}
-                    required="required"
-                    onChange={(e) => setSummary(e.target.value)}
+                    id="summary"
+                    name="summary"
+                    value={formik.values.summary}
+                    onChange={formik.handleChange}
                 >
                 </input>
                 <br />
                 <label className="form-box">book cover image:</label>
                 <input
-                    id="url-input"
-                    type="text"
-                    value={url}
-                    required="required"
-                    onChange={(e) => setUrl(e.target.value)}
+                    id="imageUrl"
+                    name="imageUrl"
+                    value={formik.values.image_url}
+                    onChange={formik.handleChange}
                 >
                 </input>
                 <br />
-                <button className="submit-button">add book</button>
+                <button type="submit" className="submit-button">add book</button>
             </form>
         </div>
     );

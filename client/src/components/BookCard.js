@@ -1,6 +1,6 @@
 import React from "react";
 import "../components/styles/BookCard.css"
-function BookCard({ title, author, image_url, reviews, id }) {
+function BookCard({ title, author, image_url, reviews }) {
 
     function emojiFromRating(rating) {
         let emoji = "⭐";
