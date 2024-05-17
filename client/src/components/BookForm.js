@@ -17,7 +17,7 @@ function BookForm() {
         fetch('http://localhost:5555/books')
             .then((r) => r.json())
             .then(books => {
-                setBooks(books);
+                setBooks([...books]);
             });
     }, [refreshPage]);
 
@@ -38,11 +38,12 @@ function BookForm() {
             author: "",
             yearPublished: "",
             summary: "",
-            image_url: "",
+            imageUrl: "",
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch('books', {
+            console.log(values);
+            fetch('http://localhost:5555/books', {
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"
@@ -50,8 +51,9 @@ function BookForm() {
                 body: JSON.stringify(values, null, 2),
             })
                 .then((res) => {
-                    if (res.status == 200){
-                      setRefreshPage(!refreshPage)
+                    console.log(res.status);
+                    if (res.status == 201) {
+                      setRefreshPage(!refreshPage);
                     }
                 });
         }
@@ -85,6 +87,7 @@ function BookForm() {
                     name="yearPublished"
                     value={formik.values.yearPublished}
                     onChange={formik.handleChange}
+                    type="number"
                 >
                 </input>
                 <br />
@@ -101,7 +104,7 @@ function BookForm() {
                 <input
                     id="imageUrl"
                     name="imageUrl"
-                    value={formik.values.image_url}
+                    value={formik.values.imageUrl}
                     onChange={formik.handleChange}
                 >
                 </input>

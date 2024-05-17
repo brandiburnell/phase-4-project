@@ -27,9 +27,9 @@ class Books(Resource):
         newBook = Book(
             title=request_data['title'],
             author=request_data['author'],
-            year_published=request_data['year_published'],
+            year_published=request_data['yearPublished'],
             summary=request_data['summary'],
-            image_url=request_data['image_url']
+            image_url=request_data['imageUrl']
         )
         
         db.session.add(newBook)
