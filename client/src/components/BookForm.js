@@ -22,14 +22,15 @@ function BookForm() {
     }, [refreshPage]);
 
     const formSchema = yup.object().shape({
-        // title: yup.string().required("Must enter a book title"),
-        // author: yup.string().required("Must enter an author"),
-        // yearPublished: yup.number().positive().integer()
-        //                 .required("Must enter a year published")
-        //                 .typeError("Please enter an integer")
-        //                 .min(2000),
-        // summary: yup.string().required("Must enter a book summary"),
-        // image_url: yup.string().required("Must enter an image url")
+        title: yup.string().required("must enter a book title"),
+        author: yup.string().required("must enter an author"),
+        yearPublished: yup.number().positive().integer()
+                        .required("must enter a year published")
+                        .typeError("please enter an integer")
+                        .min(2000, "year published must be greater than 2000")
+                        .max(2024, "year published must be less than 2024"),
+        summary: yup.string().required("must enter a book summary"),
+        imageUrl: yup.string().required("must enter an image url").url("image url must be a valid url")
     });
 
     const formik = useFormik({
@@ -51,9 +52,9 @@ function BookForm() {
                 body: JSON.stringify(values, null, 2),
             })
                 .then((res) => {
-                    console.log(res.status);
                     if (res.status == 201) {
                       setRefreshPage(!refreshPage);
+                      formik.resetForm();
                     }
                 });
         }
@@ -62,7 +63,7 @@ function BookForm() {
     return (
         <div className="book-form-container">
             <h2 className="page-title">add a new book using the form below</h2>
-            <form className="book-form" onSubmit={formik.handleSubmit}>
+            <form id="add-book-form" className="book-form" onSubmit={formik.handleSubmit}>
                 <label className="form-box">title:</label>
                 <input
                     id="title"
@@ -71,6 +72,7 @@ function BookForm() {
                     onChange={formik.handleChange}
                 >
                 </input>
+                <p className="error-tag">{formik.errors.title}</p>
                 <br/>
                 <label className="form-box">author:</ label>
                 <input
@@ -80,6 +82,7 @@ function BookForm() {
                     onChange={formik.handleChange}
                 >
                 </input>
+                <p className="error-tag">{formik.errors.author}</p>
                 <br />
                 <label className="form-box">year published:</label>
                 <input
@@ -90,6 +93,7 @@ function BookForm() {
                     type="number"
                 >
                 </input>
+                <p className="error-tag">{formik.errors.yearPublished}</p>
                 <br />
                 <label className="form-box">summary:</label>
                 <input 
@@ -99,6 +103,7 @@ function BookForm() {
                     onChange={formik.handleChange}
                 >
                 </input>
+                <p className="error-tag">{formik.errors.summary}</p>
                 <br />
                 <label className="form-box">book cover image:</label>
                 <input
@@ -108,6 +113,7 @@ function BookForm() {
                     onChange={formik.handleChange}
                 >
                 </input>
+                <p className="error-tag">{formik.errors.imageUrl}</p>
                 <br />
                 <button type="submit" className="submit-button">add book</button>
             </form>
