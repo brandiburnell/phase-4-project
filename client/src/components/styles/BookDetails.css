@@ -1,0 +1,26 @@
+.book-deatils-container {
+    align-items: center;
+}
+
+.book-details {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    width: 75%;
+    background-image: linear-gradient(#FFE297, #140029);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.book-attributes {
+    display: block;
+    padding: 5%;
+    height: 30em;
+    align-items: center;
+}
+
+.book-attribute {
+    margin-bottom: 10px;
+}

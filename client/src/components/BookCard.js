@@ -1,6 +1,9 @@
 import React from "react";
 import "../components/styles/BookCard.css"
-function BookCard({ title, author, image_url, reviews }) {
+import { useNavigate } from "react-router-dom";
+
+function BookCard({ title, author, image_url, reviews, id }) {
+    const navigate = useNavigate();
 
     function emojiFromRating(rating) {
         let emoji = "⭐";
@@ -30,8 +33,9 @@ function BookCard({ title, author, image_url, reviews }) {
         }
     }
 
+
     return (
-        <div className="book-card">
+        <div className="book-card" onClick={() => navigate(`/books/${id}`) }>
             <h3 className="title">{title}</h3>
             <img
                 src={image_url}

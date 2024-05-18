@@ -14,6 +14,7 @@ function AllBooks() {
                 image_url={book.image_url}
                 reviews={book.reviews}
                 key={book.id}
+                id={book.id}
             />
         );
     });

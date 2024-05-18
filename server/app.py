@@ -37,9 +37,16 @@ class Books(Resource):
 
         return make_response(newBook.to_dict(), 201)
 
+class BookByID(Resource):
+    def get(self, id):
+        book = Book.query.filter_by(id=id).first().to_dict()
+
+        return make_response(book, 200)
+
 
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')
+api.add_resource(BookByID, '/books/<int:id>')
 
 
 if __name__ == '__main__':
