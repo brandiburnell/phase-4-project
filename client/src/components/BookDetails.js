@@ -50,7 +50,7 @@ function BookDetails() {
                         className="book-detail-image"
                         src={book.image_url}
                         alt={`a picture of the cover of ${book.title}`}
-                        style={{width: "40%", height: "30em", objectFit: "cover", padding: "5%", borderRadius: "80px"}}
+                        style={{width: "500px", height: "500px", objectFit: "cover", padding: "5%", borderRadius: "80px"}}
                     >
                     </img>
                     <div className="book-attributes"> 
@@ -69,7 +69,7 @@ function BookDetails() {
                         <h2>reviews</h2>
                         <button className="add-review">add a review</button>
                     </div>
-                    {bookReviews}
+                    {bookReviews.length === 0? <div className="review" style={{justifyItems: "center"}}>no reviews yet</div> : bookReviews}
                 </div>
             </div>
         </div>
