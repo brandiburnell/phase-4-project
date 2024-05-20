@@ -45,7 +45,7 @@ function BookCard({ title, author, image_url, reviews, id }) {
             <p className="author">by: {author}</p>
             <p>{getAvgRating(reviews) === null? '☆☆☆☆☆' : emojiFromRating(getAvgRating(reviews))}</p>
         </div>
-    )
+    );
 }
 
 export default BookCard;
