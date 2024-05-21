@@ -29,23 +29,24 @@ function ReviewForm () {
             rating: "",
             subject: "",
             username: "",
+            bookId: parseInt(bookId)
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
             console.log(values);
-            // fetch('http://localhost:5555/books', {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type" : "application/json"
-            //     },
-            //     body: JSON.stringify(values, null, 2),
-            // })
-            //     .then((res) => {
-            //         if (res.status == 201) {
-            //           setRefreshPage(!refreshPage);
-            //           formik.resetForm();
-            //         }
-            //     });
+            fetch('http://localhost:5555/reviews', {
+                method: "POST",
+                headers: {
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify(values, null, 2),
+            })
+                .then((res) => {
+                    if (res.status === 201) {
+                      setRefreshPage(!refreshPage);
+                      formik.resetForm();
+                    }
+                });
         }
     });
 

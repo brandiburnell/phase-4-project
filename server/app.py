@@ -47,18 +47,46 @@ class Reviews(Resource):
     def post(self):
         request_data = request.get_json()
         print(request_data)
-        # newReview = Review(
-        #     bood_id = ,# grab from params somehow
-        #     description = ,
-        #     rating = ,
-        #     subject = ,
-        #     user_id = # look up user id from db from user input
-        # )
 
-        # db.session.add(newReview)
-        # db.session.commit()
+        try:
+            user = User.query.filter_by(username=request_data['username']).first()
 
-        # return make_response(newReview.to_dict(), 201)
+            newReview = Review(
+            book_id = request_data['bookId'],
+            description = request_data['description'],
+            rating = request_data['rating'],
+            subject = request_data['subject'],
+            user_id = user.id# look up user id from db from user input
+            )
+
+            db.session.add(newReview)
+            db.session.commit()
+
+            print(newReview)
+
+        except:
+            new_user = User(
+                username = request_data['username']
+            )
+            db.session.add(new_user)
+            db.session.commit()
+
+            user = User.query.filter_by(username=request_data['username']).first()
+
+            newReview = Review(
+            book_id = request_data['bookId'],
+            description = request_data['description'],
+            rating = request_data['rating'],
+            subject = request_data['subject'],
+            user_id = user.id # look up user id from db from user input
+            )
+
+            print(newReview)
+
+            db.session.add(newReview)
+            db.session.commit()
+        
+        return make_response(request_data, 201)
 
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')

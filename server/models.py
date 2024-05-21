@@ -15,7 +15,7 @@ class User(db.Model, SerializerMixin):
     reviews = db.relationship('Review', backref='user')
 
     def __repr__(self):
-        return f'<User {self.id}, {self.username}: {self.first_name}, {self.last_name}>'
+        return f'<User {self.id}, {self.username}>'
 
 class Book(db.Model, SerializerMixin):
     __tablename__ = 'books'
