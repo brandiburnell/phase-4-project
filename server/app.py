@@ -42,11 +42,28 @@ class BookByID(Resource):
         book = Book.query.filter_by(id=id).first().to_dict()
 
         return make_response(book, 200)
+    
+class Reviews(Resource):
+    def post(self):
+        request_data = request.get_json()
+        print(request_data)
+        # newReview = Review(
+        #     bood_id = ,# grab from params somehow
+        #     description = ,
+        #     rating = ,
+        #     subject = ,
+        #     user_id = # look up user id from db from user input
+        # )
 
+        # db.session.add(newReview)
+        # db.session.commit()
+
+        # return make_response(newReview.to_dict(), 201)
 
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')
 api.add_resource(BookByID, '/books/<int:id>')
+api.add_resource(Reviews, '/reviews')
 
 
 if __name__ == '__main__':

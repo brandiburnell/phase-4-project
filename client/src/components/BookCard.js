@@ -35,7 +35,7 @@ function BookCard({ title, author, image_url, reviews, id }) {
 
 
     return (
-        <div className="book-card" onClick={() => navigate(`/books/${id}`) }>
+        <div className="book-card" onClick={() => navigate(`/books/${id}`)}>
             <h3 className="title">{title}</h3>
             <img
                 src={image_url}

@@ -15,11 +15,6 @@ function NavBar() {
                 className="nav-link"
             >
             add a book</NavLink>
-            <NavLink
-                to="search"
-                className="nav-link">
-            search</NavLink>
-
         </nav>
     );
 }

@@ -1,11 +1,13 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import './styles/BookDetails.css'
+import { useNavigate } from "react-router-dom";
 
 function BookDetails() {
     const [book, setBook] = useState({});
     const params = useParams();
     const bookId = params.id;
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch(`http://localhost:5555/books/${bookId}`)
@@ -39,7 +41,6 @@ function BookDetails() {
             </div>
         )
     });
-    console.log(bookReviews);
 
     return (
         <div className="book-details-container">
@@ -67,7 +68,7 @@ function BookDetails() {
                 <div className="review-container">
                     <div className="review-heading">
                         <h2>reviews</h2>
-                        <button className="add-review">add a review</button>
+                        <button className="add-review" onClick={() => navigate(`/newreview/${bookId}`)}>add a review</button>
                     </div>
                     {bookReviews.length === 0? <div className="review" style={{justifyItems: "center"}}>no reviews yet</div> : bookReviews}
                 </div>

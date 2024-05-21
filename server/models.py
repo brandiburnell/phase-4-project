@@ -11,8 +11,6 @@ class User(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
-    first_name = db.Column(db.String, nullable=False)
-    last_name = db.Column(db.String)
 
     reviews = db.relationship('Review', backref='user')
 
