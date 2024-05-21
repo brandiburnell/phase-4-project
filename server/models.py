@@ -7,7 +7,7 @@ from config import db
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
-    serialize_rules = ('-reviews.book', '-reviews.book')
+    serialize_rules = ('-reviews.book', '-reviews.user')
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False, unique=True)
@@ -15,8 +15,6 @@ class User(db.Model, SerializerMixin):
     last_name = db.Column(db.String)
 
     reviews = db.relationship('Review', backref='user')
-    books = association_proxy('reviews', 'book',
-                              creator=lambda book_obj: Review(book=book_obj))
 
     def __repr__(self):
         return f'<User {self.id}, {self.username}: {self.first_name}, {self.last_name}>'
@@ -34,8 +32,6 @@ class Book(db.Model, SerializerMixin):
     image_url = db.Column(db.String)
 
     reviews = db.relationship('Review', backref='book')
-    users = association_proxy('reviews', 'user',
-                              creator=lambda user_obj: Review(user=user_obj))
 
     def __repr__(self):
         return f'<Book {self.id}, {self.title}: {self.author}, {self.summary}, {self.year_published}>'
