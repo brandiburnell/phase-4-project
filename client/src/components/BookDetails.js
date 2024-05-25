@@ -34,7 +34,7 @@ function BookDetails() {
                 userId={review.user_id}
                 key={review.id}
             />
-        )
+        );
     });
 
     return (

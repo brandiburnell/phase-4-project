@@ -28,7 +28,7 @@ function ReviewCard({ bookId, description, rating, subject, userId }) {
             <p style={{fontStyle: "italic"}}>by: {user.username}</p>
             <p>{description}</p>
          </div>
-    )
+    );
 }
 
 export default ReviewCard;

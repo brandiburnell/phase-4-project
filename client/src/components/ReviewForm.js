@@ -6,12 +6,12 @@ import * as yup from "yup";
 function ReviewForm () {
     const params = useParams();
     const bookId = params.bookID;
-    const [refreshPage, setRefreshPage] = useState(false);
+    // const [refreshPage, setRefreshPage] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        // reset form??
-    }, [refreshPage]);
+    // useEffect(() => {
+    //     // reset form??
+    // }, [refreshPage]);
 
     const formSchema = yup.object().shape({
         description: yup.string().required("must enter a review body"),
@@ -44,8 +44,9 @@ function ReviewForm () {
             })
                 .then((res) => {
                     if (res.status === 201) {
-                      setRefreshPage(!refreshPage);
+                    //   setRefreshPage(!refreshPage);
                       formik.resetForm();
+                      navigate(`/books/${bookId}`)
                       // mavigate back to book page 
                       // add user to review
                     }
