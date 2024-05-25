@@ -1,16 +1,17 @@
 import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import './styles/BookDetails.css'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
+import { ref } from "yup";
 
 function BookDetails() {
     const [book, setBook] = useState({});
     const params = useParams();
     const bookId = params.id;
     const navigate = useNavigate();
-    const [userId, setUserId] = useState("");
-    const [user, setUser] = useState({});
+    const [books, setBooks] = useOutletContext();
+    const [refreshPage, setRefreshPage] = useState(false);
 
     useEffect(() => {
         fetch(`http://localhost:5555/books/${bookId}`)
@@ -19,12 +20,23 @@ function BookDetails() {
             .catch(error => console.error(error));
     }, [])
 
+    useEffect(() => {
+        if (refreshPage) {
+            navigate('/');
+        }
+    }, [refreshPage])
+
     function handleDelete() {
         if (window.confirm("are you sure you want to delete this book?")) {
-            console.log('they do want to delete it');
-        }
-        else {
-            console.log('they didnt');
+            fetch(`http://localhost:5555/books/${bookId}`, {
+                method: "DELETE",
+            })
+                .then(() => {
+                    const newBooks = books.filter((book) => book.id !== bookId);
+                    setBooks(newBooks); 
+                    window.alert(`${book.title} has been removed from the library`)
+                    setRefreshPage(!refreshPage);
+                });
         }
         // delete book by id
         // delete corresponding reviews to book

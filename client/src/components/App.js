@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 
 function App() {
-  // have all huts pop in
+  // have all books pop in
   const [books, setBooks] = useState(['book']);
 
   // add useEffect for books
@@ -11,7 +11,7 @@ function App() {
     fetch('http://localhost:5555/books')
       .then(r => r.json())
       .then(books => setBooks(books));
-  }, []);
+  }, [books]);
 
   return (
     <div className="body">

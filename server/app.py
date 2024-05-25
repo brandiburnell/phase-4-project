@@ -43,6 +43,15 @@ class BookByID(Resource):
 
         return make_response(book, 200)
     
+    def delete(self, id):
+        book = Book.query.filter_by(id=id).first()
+
+        db.session.delete(book)
+        db.session.commit()
+
+        make_response('message successfuly deleted', 200)
+
+    
 class Reviews(Resource):
     def post(self):
         request_data = request.get_json()

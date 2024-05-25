@@ -10,11 +10,7 @@ function BookForm() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch('http://localhost:5555/books')
-            .then((r) => r.json())
-            .then(books => {
-                setBooks([...books]);
-            });
+        setBooks([...books]);
         if (refreshPage) {
             navigate('/');
         }
