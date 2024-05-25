@@ -19,6 +19,17 @@ function BookDetails() {
             .catch(error => console.error(error));
     }, [])
 
+    function handleDelete() {
+        if (window.confirm("are you sure you want to delete this book?")) {
+            console.log('they do want to delete it');
+        }
+        else {
+            console.log('they didnt');
+        }
+        // delete book by id
+        // delete corresponding reviews to book
+    }
+
     if (!book.title) {
         return <h1>loading...</h1>;
     };
@@ -57,6 +68,8 @@ function BookDetails() {
                         <p className="book-attribute">{book.year_published}</p>
                         <p className="attribute-label">book summary: </p>
                         <p className="book-attribute">{book.summary}</p>
+                        <p className="attribute-label">book actions: </p>
+                        <button className="delete-button" onClick={handleDelete}>delete book</button>
                     </div>
                 </div>
                 <div className="review-container">
