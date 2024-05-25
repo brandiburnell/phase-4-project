@@ -87,11 +87,18 @@ class Reviews(Resource):
             db.session.commit()
         
         return make_response(request_data, 201)
+    
+class UserByID(Resource):
+    def get(self, id):
+        user = User.query.filter_by(id=id).first().to_dict()
+
+        return make_response(user, 200)
 
 api.add_resource(Home, '/')
 api.add_resource(Books, '/books')
 api.add_resource(BookByID, '/books/<int:id>')
 api.add_resource(Reviews, '/reviews')
+api.add_resource(UserByID, '/users/<int:id>')
 
 
 if __name__ == '__main__':

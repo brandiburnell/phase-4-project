@@ -2,43 +2,38 @@ import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import './styles/BookDetails.css'
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "./ReviewCard";
 
 function BookDetails() {
     const [book, setBook] = useState({});
     const params = useParams();
     const bookId = params.id;
     const navigate = useNavigate();
+    const [userId, setUserId] = useState("");
+    const [user, setUser] = useState({});
 
     useEffect(() => {
         fetch(`http://localhost:5555/books/${bookId}`)
             .then(r => r.json())
             .then(book => setBook(book))
             .catch(error => console.error(error));
-    }, [bookId])
+    }, [])
 
     if (!book.title) {
         return <h1>loading...</h1>;
     };
 
-    function emojiFromRating(rating) {
-        let emoji = "⭐";
-        let emojis = "";
-
-        for (let i = 0; i < rating; i++) {
-            emojis += emoji;
-        }
-
-        return emojis;
-    }
-
     console.log(book.reviews);
     const bookReviews = book.reviews.map(review => {
         return (
-            <div key={review.id} className="review">
-                <p>{emojiFromRating(review.rating)}</p>
-                <p style={{fontWeight: "bold"}}>{review.subject}</p>
-                <p>{review.description}</p>
-            </div>
+            <ReviewCard
+                bookId={bookId}
+                description={review.description}
+                rating={review.rating}
+                subject={review.subject}
+                userId={review.user_id}
+                key={review.id}
+            />
         )
     });
 

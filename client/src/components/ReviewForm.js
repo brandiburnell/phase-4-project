@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -7,6 +7,7 @@ function ReviewForm () {
     const params = useParams();
     const bookId = params.bookID;
     const [refreshPage, setRefreshPage] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         // reset form??
@@ -45,6 +46,8 @@ function ReviewForm () {
                     if (res.status === 201) {
                       setRefreshPage(!refreshPage);
                       formik.resetForm();
+                      // mavigate back to book page 
+                      // add user to review
                     }
                 });
         }
