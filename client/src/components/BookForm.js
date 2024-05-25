@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../components/styles/BookForm.css"
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 function BookForm() {
-    // const [title, setTitle] = useState("");
-    // const [author, setAuthor] = useState("");
-    // const [year, setYear] = useState("");
-    // const [summary, setSummary] = useState("");
-    // const [url, setUrl] = useState("");
     const [books, setBooks] = useOutletContext();
     const [refreshPage, setRefreshPage] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:5555/books')
@@ -19,6 +15,9 @@ function BookForm() {
             .then(books => {
                 setBooks([...books]);
             });
+        if (refreshPage) {
+            navigate('/');
+        }
     }, [refreshPage]);
 
     const formSchema = yup.object().shape({
@@ -27,7 +26,7 @@ function BookForm() {
         yearPublished: yup.number().positive().integer()
                         .required("must enter a year published")
                         .typeError("please enter an integer")
-                        .min(2000, "year published must be greater than 2000")
+                        .min(1500, "year published must be greater than 1500")
                         .max(2024, "year published must be less than 2024"),
         summary: yup.string().required("must enter a book summary"),
         imageUrl: yup.string().required("must enter an image url").url("image url must be a valid url")
@@ -43,7 +42,6 @@ function BookForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            console.log(values);
             fetch('http://localhost:5555/books', {
                 method: "POST",
                 headers: {
@@ -53,8 +51,8 @@ function BookForm() {
             })
                 .then((res) => {
                     if (res.status == 201) {
-                      setRefreshPage(!refreshPage);
-                      formik.resetForm();
+                        formik.resetForm();
+                        setRefreshPage(!refreshPage);
                     }
                 });
         }

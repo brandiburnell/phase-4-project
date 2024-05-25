@@ -23,7 +23,6 @@ function BookDetails() {
         return <h1>loading...</h1>;
     };
 
-    console.log(book.reviews);
     const bookReviews = book.reviews.map(review => {
         return (
             <ReviewCard
