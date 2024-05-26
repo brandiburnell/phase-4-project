@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import './styles/BookDetails.css'
 import { useNavigate, useOutletContext } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
-import { ref } from "yup";
 
 function BookDetails() {
     const [book, setBook] = useState({});

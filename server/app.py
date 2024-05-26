@@ -45,8 +45,12 @@ class BookByID(Resource):
     
     def delete(self, id):
         book = Book.query.filter_by(id=id).first()
-
         db.session.delete(book)
+        
+        book_reviews = book.reviews
+        for review in book_reviews:
+            db.session.delete(review)
+
         db.session.commit()
 
         make_response('message successfuly deleted', 200)
