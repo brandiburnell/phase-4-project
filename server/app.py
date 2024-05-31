@@ -43,6 +43,19 @@ class BookByID(Resource):
 
         return make_response(book, 200)
     
+    def patch(self, id):
+        book = Book.query.filter_by(id=id).first()
+        request_data = request.get_json()
+        for attr in request_data:
+            if request_data[attr] != "":
+                setattr(book, attr, request_data[attr])
+
+        db.session.add(book)
+        db.session.commit()
+
+        return make_response(book.to_dict(), 200)
+
+    
     def delete(self, id):
         book = Book.query.filter_by(id=id).first()
         db.session.delete(book)

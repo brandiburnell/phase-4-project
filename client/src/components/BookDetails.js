@@ -39,10 +39,6 @@ function BookDetails() {
         }
     }
 
-    function handleChange() {
-        console.log('be changed');
-    }
-
     if (!book.title) {
         return <h1>loading...</h1>;
     };
@@ -82,7 +78,7 @@ function BookDetails() {
                         <p className="attribute-label">book summary: </p>
                         <p className="book-attribute">{book.summary}</p>
                         <p className="attribute-label">book actions: </p>
-                        <button className="delete-button" onClick={handleChange} style={{backgroundColor: '#140029', marginBottom: '10px'}}>update book</button>
+                        <button className="delete-button" onClick={() => navigate(`/updatebook/${bookId}`)} style={{backgroundColor: '#140029', marginBottom: '10px'}}>update book</button>
                         <button className="delete-button" onClick={handleDelete}>delete book</button>
                     </div>
                 </div>

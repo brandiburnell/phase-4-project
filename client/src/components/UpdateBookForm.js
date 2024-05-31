@@ -22,25 +22,25 @@ function UpdateBookForm() {
     const formSchema = yup.object().shape({
         title: yup.string(),
         author: yup.string(),
-        yearPublished: yup.number().positive().integer()
+        year_published: yup.number().positive().integer()
                         .typeError("please enter an integer")
                         .min(1500, "year published must be greater than 1500")
                         .max(2024, "year published must be less than 2024"),
         summary: yup.string(),
-        imageUrl: yup.string().url("image url must be a valid url")
+        image_url: yup.string().url("image url must be a valid url")
     });
 
     const formik = useFormik({
         initialValues: {
             title: "",
             author: "",
-            yearPublished: "",
+            year_published: "",
             summary: "",
-            imageUrl: "",
+            image_url: "",
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch('http://localhost:5555/books', {
+            fetch(`http://localhost:5555/books/${bookId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type" : "application/json"
@@ -50,7 +50,7 @@ function UpdateBookForm() {
                 .then((res) => {
                     if (res.status == 200) {
                         console.log(res.json);
-                        formik.resetForm();
+                        navigate(`/books/${bookId}`)
                     }
                 });
         }
@@ -85,15 +85,15 @@ function UpdateBookForm() {
                 <br />
                 <label className="form-box">year published:</label>
                 <input
-                    id="yearPublihed"
-                    name="yearPublished"
-                    value={formik.values.yearPublished}
+                    id="year_publihed"
+                    name="year_published"
+                    value={formik.values.year_published}
                     onChange={formik.handleChange}
                     type="number"
                     placeholder={book.year_published}
                 >
                 </input>
-                <p className="error-tag">{formik.errors.yearPublished}</p>
+                <p className="error-tag">{formik.errors.year_published}</p>
                 <br />
                 <label className="form-box">summary:</label>
                 <input 
@@ -108,14 +108,14 @@ function UpdateBookForm() {
                 <br />
                 <label className="form-box">book cover image:</label>
                 <input
-                    id="imageUrl"
-                    name="imageUrl"
-                    value={formik.values.imageUrl}
+                    id="image_url"
+                    name="image_url"
+                    value={formik.values.image_url}
                     onChange={formik.handleChange}
                     placeholder={book.image_url}
                 >
                 </input>
-                <p className="error-tag">{formik.errors.imageUrl}</p>
+                <p className="error-tag">{formik.errors.image_url}</p>
                 <br />
                 <button type="submit" className="submit-button">update book</button>
             </form>
