@@ -3,6 +3,7 @@ import AllBooks from "./components/AllBooks";
 import BookForm from "./components/BookForm";
 import BookDetails from "./components/BookDetails";
 import ReviewForm from "./components/ReviewForm";
+import UpdateBookForm from "./components/UpdateBookForm";
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
             {
                 path: "/newreview/:bookID",
                 element: <ReviewForm />
+            },
+            {
+                path: "/updatebook/:bookID",
+                element: <UpdateBookForm />
             }
         ]
     }
