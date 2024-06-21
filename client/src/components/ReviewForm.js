@@ -13,8 +13,8 @@ function ReviewForm () {
         rating: yup.number().positive().integer()
                         .required("must enter a rating")
                         .typeError("please enter an integer")
-                        .min(1, "year published must be greater than 0")
-                        .max(5, "year published must be less or equal to 5"),
+                        .min(1, "review must be greater than 0")
+                        .max(5, "review must be less or equal to 5"),
         subject: yup.string().required("must enter a review title"),
         username: yup.string().required("must enter a username")
     });

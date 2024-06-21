@@ -44,8 +44,9 @@ if __name__ == '__main__':
         # add Book seed data
         books = []
         for i in range (20):
+            title_with_period = fake.text(max_nb_chars=20)
             book = Book(
-                title=fake.text(max_nb_chars=20),
+                title=title_with_period[:-1].upper(),
                 author=fake.name(),
                 summary=fake.paragraph(nb_sentences=3),
                 year_published=fake.year(),
