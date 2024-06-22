@@ -45,3 +45,4 @@ werkzeug==2.2.2; python_version >= '3.7'
 zipp==3.18.1; python_version >= '3.8'
 gunicorn==19.7.1
 python-dotenv==0.10.1
+psycopg2==2.9.9
