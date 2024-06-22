@@ -30,7 +30,7 @@ function ReviewForm () {
         validationSchema: formSchema,
         onSubmit: (values) => {
             console.log(values);
-            fetch('http://localhost:5555/reviews', {
+            fetch('http://localhost:8000/reviews', {
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"

@@ -4,7 +4,7 @@ function ReviewCard({ bookId, description, rating, subject, userId }) {
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:5555/users/${userId}`)
+        fetch(`http://localhost:8000/users/${userId}`)
             .then(r => r.json())
             .then(user => setUser(user))
             .catch(error => console.error(error));

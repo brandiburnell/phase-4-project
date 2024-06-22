@@ -9,7 +9,7 @@ function App() {
 
   // add useEffect for books
   useEffect(() => {
-    fetch('http://localhost:5555/books')
+    fetch('http://localhost:8000/books')
       .then(r => r.json())
       .then(books => setBooks(books));
   }, [location.key]);

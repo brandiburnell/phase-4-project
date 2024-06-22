@@ -13,7 +13,7 @@ function BookDetails() {
     const [refreshPage, setRefreshPage] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:5555/books/${bookId}`)
+        fetch(`http://localhost:8000/books/${bookId}`)
             .then(r => r.json())
             .then(book => setBook(book))
             .catch(error => console.error(error));
@@ -27,7 +27,7 @@ function BookDetails() {
 
     function handleDelete() {
         if (window.confirm("are you sure you want to delete this book?")) {
-            fetch(`http://localhost:5555/books/${bookId}`, {
+            fetch(`http://localhost:8000/books/${bookId}`, {
                 method: "DELETE",
             })
                 .then(() => {
