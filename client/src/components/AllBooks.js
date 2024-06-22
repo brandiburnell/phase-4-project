@@ -1,10 +1,10 @@
 import React from "react";
 import BookCard from "./BookCard";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import "../components/styles/AllBooks.css"
 
 function AllBooks() {
-    const [books, setBooks] = useOutletContext();
+    const [books] = useOutletContext();
 
     const booksToDisplay = books.map((book) => {
         return (

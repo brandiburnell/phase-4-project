@@ -48,7 +48,7 @@ function UpdateBookForm() {
                 body: JSON.stringify(values, null, 2),
             })
                 .then((res) => {
-                    if (res.status == 200) {
+                    if (res.status === 200) {
                         console.log(res.json);
                         navigate(`/books/${bookId}`)
                     }

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "../components/styles/BookForm.css"
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
 function BookForm() {
-    const [books, setBooks] = useOutletContext();
     const [refreshPage, setRefreshPage] = useState(false);
     const navigate = useNavigate();
 
@@ -46,7 +45,7 @@ function BookForm() {
                 body: JSON.stringify(values, null, 2),
             })
                 .then((res) => {
-                    if (res.status == 201) {
+                    if (res.status === 201) {
                         formik.resetForm();
                         setRefreshPage(!refreshPage);
                     }

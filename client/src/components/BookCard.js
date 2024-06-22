@@ -39,7 +39,7 @@ function BookCard({ title, author, image_url, reviews, id }) {
             <h3 className="title">{title}</h3>
             <img
                 src={image_url}
-                alt={`a picture of the cover of ${title}`}
+                alt={`the cover of ${title}`}
                 className="book-image"
             />
             <p className="author">by: {author}</p>
