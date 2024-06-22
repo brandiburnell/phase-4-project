@@ -13,6 +13,7 @@ function BookForm() {
         if (refreshPage) {
             navigate('/');
         }
+    //eslint-disable-next-line
     }, [refreshPage]);
 
     const formSchema = yup.object().shape({

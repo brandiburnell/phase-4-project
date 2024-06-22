@@ -16,7 +16,7 @@ function UpdateBookForm() {
             .then(r => r.json())
             .then(book => setBook(book))
             .catch(error => console.error(error));
-        
+    //eslint-disable-next-line
     }, []);
 
     const formSchema = yup.object().shape({

@@ -17,12 +17,14 @@ function BookDetails() {
             .then(r => r.json())
             .then(book => setBook(book))
             .catch(error => console.error(error));
+    //eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         if (refreshPage) {
             navigate('/');
         }
+    // eslint-disable-next-line
     }, [refreshPage])
 
     function handleDelete() {
@@ -64,7 +66,7 @@ function BookDetails() {
                     <img
                         className="book-detail-image"
                         src={book.image_url}
-                        alt={`a picture of the cover of ${book.title}`}
+                        alt={`the cover of ${book.title}`}
                         style={{width: "500px", height: "500px", objectFit: "cover", padding: "5%", borderRadius: "80px"}}
                     >
                     </img>

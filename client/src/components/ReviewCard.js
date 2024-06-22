@@ -8,6 +8,7 @@ function ReviewCard({ bookId, description, rating, subject, userId }) {
             .then(r => r.json())
             .then(user => setUser(user))
             .catch(error => console.error(error));
+    //eslint-disable-next-line
     }, [])
 
     function emojiFromRating(rating) {
