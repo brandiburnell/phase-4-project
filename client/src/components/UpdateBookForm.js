@@ -12,7 +12,7 @@ function UpdateBookForm() {
 
     // fetch to get inital values
     useEffect(() => {
-        fetch(`http://localhost:8000/books/${bookId}`)
+        fetch(`/books/${bookId}`)
             .then(r => r.json())
             .then(book => setBook(book))
             .catch(error => console.error(error));
@@ -40,7 +40,7 @@ function UpdateBookForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch(`http://localhost:8000/books/${bookId}`, {
+            fetch(`books/${bookId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type" : "application/json"

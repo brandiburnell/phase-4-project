@@ -38,7 +38,7 @@ function BookForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch('http://localhost:8000/books', {
+            fetch('/books', {
                 method: "POST",
                 headers: {
                     "Content-Type" : "application/json"
