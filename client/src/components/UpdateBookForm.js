@@ -40,7 +40,7 @@ function UpdateBookForm() {
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
-            fetch(`books/${bookId}`, {
+            fetch(`/books/${bookId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type" : "application/json"
