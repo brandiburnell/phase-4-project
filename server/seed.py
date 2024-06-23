@@ -15,9 +15,9 @@ if __name__ == '__main__':
     with app.app_context():
 
         print("Deleting all records...")
-        User.query.delete()
-        Book.query.delete()
         Review.query.delete()
+        Book.query.delete()
+        User.query.delete()
 
         print("Starting seed...")
         # Seed code goes here!
@@ -80,5 +80,6 @@ if __name__ == '__main__':
 
         print('Committing all data...')
         db.session.commit()
+        print('Complete.')
 
             
